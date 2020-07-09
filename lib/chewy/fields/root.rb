@@ -90,7 +90,7 @@ module Chewy
           result.as_json(only: fields, root: false)
         else
           result.as_json(root: false)
-        end
+        end.merge(type: name)
       end
 
       # Children indexed by name as a hash.

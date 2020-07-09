@@ -22,7 +22,7 @@ module Chewy
       end
 
       def initialize(attributes = {})
-        @attributes = attributes.stringify_keys
+        @attributes = attributes.stringify_keys.merge(type: self.class.type_name)
       end
 
       def ==(other)
