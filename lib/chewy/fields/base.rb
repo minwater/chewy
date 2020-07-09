@@ -40,6 +40,12 @@ module Chewy
           mapping[:index] = 'not_analyzed'
         end
 
+        if mapping[:type] == "object"
+          (mapping[:properties] ||= {}).merge!("type": { "type": 'keyword' } )
+        end
+
+        return {"_doc" => mapping} if mapping[:type] == "object"
+
         {name => mapping}
       end
 

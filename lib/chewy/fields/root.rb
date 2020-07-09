@@ -22,14 +22,16 @@ module Chewy
 
       def mappings_hash
         mappings = super
-        mappings[name].delete(:type)
+
+        mappings['_doc'].delete(:type)
+        mappings['_doc'].delete(:_all)
 
         if dynamic_templates.present?
-          mappings[name][:dynamic_templates] ||= []
-          mappings[name][:dynamic_templates].concat dynamic_templates
+          mappings['_doc'][:dynamic_templates] ||= []
+          mappings['_doc'][:dynamic_templates].concat dynamic_templates
         end
 
-        mappings[name][:_parent] = parent.is_a?(Hash) ? parent : {type: parent} if parent
+        mappings['_doc'][:_parent] = parent.is_a?(Hash) ? parent : {type: parent} if parent
         mappings
       end
 
